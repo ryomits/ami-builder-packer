@@ -1,0 +1,8 @@
+- name: install ruby
+  yum: pkg=ruby state=installed
+
+- name: download code deploy installer
+  get_url: url=https://aws-codedeploy-ap-northeast-1.s3.amazonaws.com/latest/install dest=/tmp/codedeploy-install
+
+- name: install code deploy
+  shell: ruby /tmp/codedeploy-install auto
