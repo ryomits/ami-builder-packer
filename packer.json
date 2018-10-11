@@ -1,0 +1,37 @@
+{
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "instance_type": "t2.micro",
+      "region": "ap-northeast-1",
+      "source_ami": "ami-2724cf58",
+      "ami_name": "packer-{{user `version`}}",
+      "ssh_username": "ec2-user",
+      "ssh_pty": true
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo yum -y update",
+        "sudo yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm",
+        "sudo yum install -y --enablerepo=epel ansible",
+        "mkdir -p /tmp/packer-provisioner-ansible-local"
+      ]
+    },
+    {
+      "type": "ansible-local",
+      "role_paths": [
+        "ansible/roles/common"
+      ],
+      "playbook_file": "ansible/playbook.yaml"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "rm .ssh/authorized_keys ; sudo rm /root/.ssh/authorized_keys"
+      ]
+    }
+  ]
+}

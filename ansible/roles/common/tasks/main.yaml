@@ -1,0 +1,11 @@
+- name: upgrade all packages
+  yum: name=* state=latest
+
+- name: set timezone to Asia/Tokyo
+  timezone: name=Asia/Tokyo
+
+- name: set LANG
+  shell: "echo \"LANG=ja_JP.UTF-8\" > /etc/sysconfig/i18n"
+
+- name: set locale
+  shell: "echo \"locale: ja_JP.UTF-8\" > /etc/cloud/cloud.cfg.d/ccb-change-locale.cfg"
