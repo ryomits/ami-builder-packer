@@ -1,0 +1,8 @@
+- name: install awslogs
+  yum: name=awslogs state=latest
+
+- name: copy awscli.conf
+  copy: src=../files/awscli.conf dest=/etc/awslogs/awscli.conf
+
+- name: copy awslogs.conf
+  copy: src=../files/awslogs.conf dest=/etc/awslogs/awslogs.conf
