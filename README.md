@@ -1,5 +1,5 @@
 # ami-builder-packer
 
 ```
-packer build -ver "version=xxx" packer.json
+packer build -var "version=xxx" packer.json
 ```
